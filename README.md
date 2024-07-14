@@ -1,7 +1,7 @@
 # nicoplus_shotplus
 nicoplus_shotplusは、ニコニコチャンネルプラスでスクリーンショットを撮影するためのUserScriptです。
 
-![image](https://github.com/user-attachments/assets/d4b3edf1-4777-4184-b8b1-49d00884a233)
+![image](https://github.com/user-attachments/assets/30f055db-5a7a-4629-af25-8766d5c4d6f0)
 
 > [!WARNING]
 > 本ツールは私的利用の範囲内でご利用ください。  
