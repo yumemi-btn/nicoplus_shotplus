@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         nicoplus_shotplus
 // @namespace    https://github.com/yumemi-btn/nicoplus_shotplus
-// @version      0.1
+// @version      0.2
 // @description  ニコニコチャンネルプラスでスクリーンショットを撮影するためのUserJSです
 // @author       @infinite_chain
 // @match        https://nicochannel.jp/*
@@ -10,6 +10,9 @@
 
 (function() {
     'use strict';
+
+    // ファイル名のフォーマット設定
+    const fileNameFormat = 'nicoplus_${currentDate}_${pageTitle}_${currentTime}.png';
 
     class ScreenshotTool {
         constructor() {
@@ -85,7 +88,10 @@
 
                 const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
                 const pageTitle = document.title;
-                const fileName = `nicoplus_${this.getCurrentDate()}_${pageTitle}_${this.formatTime(video.currentTime)}.png`;
+                const fileName = fileNameFormat
+                    .replace('${currentDate}', this.getCurrentDate())
+                    .replace('${pageTitle}', pageTitle)
+                    .replace('${currentTime}', this.formatTime(video.currentTime));
 
                 await GM_download({
                     url: URL.createObjectURL(blob),
