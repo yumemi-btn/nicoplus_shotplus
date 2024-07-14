@@ -1,0 +1,2 @@
+# nicoplus_shotplus
+ニコニコチャンネルプラスでスクリーンショットを撮影するためのUserJSです
