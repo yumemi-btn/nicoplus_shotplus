@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         nicoplus_shotplus
 // @namespace    https://github.com/yumemi-btn/nicoplus_shotplus
-// @version      0.3
+// @version      0.4
 // @description  ニコニコチャンネルプラスでスクリーンショットを撮影するためのUserJSです
 // @author       @infinite_chain
 // @match        https://nicochannel.jp/*
@@ -20,8 +20,8 @@
             this.notification = this.createNotification();
             this.video = null;
             this.isShiftPressed = false;
+            this.lastUrl = location.href;
             this.addListeners();
-            this.observeVideoElement();
         }
 
         createButton() {
@@ -84,17 +84,16 @@
                     this.togglePlayPause();
                 }
             });
+
+            // URLの変更を監視
+            setInterval(() => this.checkUrlChange(), 1000);
         }
 
-        observeVideoElement() {
-            const observer = new MutationObserver(() => {
-                const newVideo = document.querySelector('video');
-                if (newVideo && newVideo !== this.video) {
-                    this.video = newVideo;
-                }
-            });
-
-            observer.observe(document.body, { childList: true, subtree: true });
+        checkUrlChange() {
+            if (this.lastUrl !== location.href) {
+                this.lastUrl = location.href;
+                this.video = null;
+            }
         }
 
         showButton() {
